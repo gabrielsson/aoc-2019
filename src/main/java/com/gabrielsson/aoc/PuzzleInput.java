@@ -47,6 +47,11 @@ public class PuzzleInput {
         return Arrays.stream(getInputScanner().next().split(separator)).map(s -> Integer.valueOf(s)).collect(Collectors.toList());
 
     }
+    public List<String> getListOfSeparatedStrings(String separator) {
+
+        return Arrays.stream(getInputScanner().next().split(separator)).collect(Collectors.toList());
+
+    }
 
 
     public List<Integer> getListOfIntegers() {
