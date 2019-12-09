@@ -25,6 +25,8 @@ dependencies {
     implementation 'com.google.guava:guava:28.0-jre'
     compileOnly("org.projectlombok:lombok:1.18.10")
     annotationProcessor("org.projectlombok:lombok:1.18.10")
+    implementation 'com.github.dpaukov:combinatoricslib3:3.3.0'
+
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
     testCompile group: 'org.assertj', name: 'assertj-core', version: '3.14.0'

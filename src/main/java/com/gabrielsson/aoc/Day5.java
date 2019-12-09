@@ -7,10 +7,14 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 public class Day5 {
     public static int part1(List<Integer> listOfRows, int input) {
-        return runProgram(listOfRows, input);
+        return part1(listOfRows, input, 0);
+    }
+    public static int part1(List<Integer> listOfRows, int input, int phase) {
+        return runProgram(listOfRows, input, phase);
     }
 
     public static Object part2(List<Integer> listOfRows) {
@@ -18,13 +22,13 @@ public class Day5 {
         return 0;
     }
 
-    private static int runProgram(List<Integer> program, int input) {
+    private static int runProgram(List<Integer> program, int input, int phase) {
         List<Integer> currentPgm = new ArrayList(program);
         int output = 0;
 
         int currentIndex = 0;
 
-        while (currentPgm.get(currentIndex) != 99) {
+        while (getInstruction(currentPgm, currentIndex) != 99) {
             try {
 
                 Operation o = new Operation(currentPgm.get(currentIndex));
@@ -51,7 +55,7 @@ public class Day5 {
 
                         break;
                     case 3:
-                        currentPgm.set(idx1, input);
+                        currentPgm.set(idx1, currentIndex == 0 ? phase:input);
                         currentIndex = currentIndex + 2;
                         break;
                     case 4:
@@ -94,6 +98,8 @@ public class Day5 {
                         currentIndex = currentIndex + 4;
 
                         break;
+                    default:
+                        throw new UnsupportedOperationException(o.getOperation() +" is not recognized.");
 
                 }
             } catch (Exception e) {
@@ -101,6 +107,10 @@ public class Day5 {
             }
         }
         return output;
+    }
+
+    private static Integer getInstruction(List<Integer> currentPgm, int currentIndex) {
+        return currentPgm.size() < currentIndex ? -1:currentPgm.get(currentIndex);
     }
 
     @Data
